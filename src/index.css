@@ -1,0 +1,179 @@
+:root {
+  --color-bg-base: #020617;
+  --color-bg-surface: rgba(15, 23, 42, 0.8);
+  --color-bg-pillar: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+
+  /* Sci-Fi Theme Colors */
+  --color-reactor-core: #0fffff;
+  --color-reactor-glow: rgba(0, 255, 255, 0.6);
+  --color-reactor-dark: #008080;
+
+  --color-ring: #ff00ff;
+  --color-ring-glow: rgba(255, 0, 255, 0.8);
+
+  --color-accent: #0fffff;
+  --color-accent-glow: rgba(0, 255, 255, 0.5);
+
+  --color-text-primary: #f8fafc;
+  --color-text-secondary: #94a3b8;
+  --color-error: #ef4444;
+  --color-success: #10b981;
+
+  --border-radius-lg: 24px;
+  --border-radius-md: 16px;
+  --border-radius-pill: 9999px;
+
+  --font-family-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family-base);
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  line-height: 1.5;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Prevent pull-to-refresh on mobile PWA */
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Typography */
+h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+p {
+  color: var(--color-text-secondary);
+}
+
+/* Glassmorphism utilities */
+.glass-panel {
+  background: var(--color-bg-surface);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--border-radius-lg);
+  padding: 2rem;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+/* Inputs & Buttons */
+.input-field {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 1rem 1.25rem;
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.input-field:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-glow);
+}
+
+.btn-primary {
+  width: 100%;
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  padding: 1rem 1.25rem;
+  border-radius: var(--border-radius-md);
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 14px 0 var(--color-accent-glow);
+}
+
+.btn-primary:hover,
+.btn-primary:active {
+  background: #2563eb;
+  transform: translateY(-2px);
+}
+
+.btn-primary:disabled {
+  background: #475569;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+/* App Container */
+.app-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.screen-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  height: 100%;
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animations */
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
