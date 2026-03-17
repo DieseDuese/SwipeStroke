@@ -571,32 +571,49 @@ export default function PillarControl({ connectionKey, onDisconnect, onIntensity
                             }} />
                         )}
 
-                        {/* The Moving Indicator (Fader Knob / Sleeve) */}
+                        {/* The Moving Indicator (Composite Sleeve Assembly) */}
                         <div style={{
                             position: 'absolute',
                             bottom: `${visualPos}%`,
                             left: '50%',
-                            // Dynamic translation: 0% at bottom (hard cut) -> 75% at top (25% overhang)
-                            transform: `translate(-50%, ${(visualPos / 100) * 75}%)`,
-                            width: '80px',
-                            height: '25%', // Exactly 25% of the pillar's height
-                            background: isSwiping ? 'rgba(255, 255, 255, 0.1)' : 'transparent',
-                            borderRadius: '8px',
-                            border: `3px solid ${isSwiping ? '#fff' : (active ? 'var(--color-accent)' : '#94a3b8')}`,
-                            boxShadow: isSwiping
-                                ? '0 0 20px rgba(255, 255, 255, 0.4), inset 0 0 10px rgba(255, 255, 255, 0.2)'
-                                : (active ? '0 0 15px var(--color-accent-glow), inset 0 0 10px var(--color-accent-glow)' : '0 4px 6px rgba(0,0,0,0.3)'),
-                            transition: isSwiping ? 'none' : 'box-shadow 0.3s ease, border-color 0.3s ease',
+                            // Symmetric dynamic translation: 25% at bottom (inner ring flush) -> 75% at top (inner ring flush)
+                            transform: `translate(-50%, ${25 + (visualPos / 2)}%)`,
+                            width: '100px', // Back to 100px for better prominence
+                            height: '50%', // 50% of the pillar's height
+                            // Simple, clean background with a subtle blue tint
+                            background: 'rgba(56, 189, 248, 0.05)',
+                            // Distinct Blue/Accent border
+                            border: `2px solid ${active ? 'var(--color-accent)' : 'rgba(56, 189, 248, 0.3)'}`,
+                            borderRadius: '16px',
+                            // Blue outer glow when active
+                            boxShadow: active 
+                                ? '0 0 25px rgba(56, 189, 248, 0.2), inset 0 0 10px rgba(56, 189, 248, 0.1)' 
+                                : '0 4px 12px rgba(0, 0, 0, 0.2)',
                             pointerEvents: 'none',
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            zIndex: 10,
-                            backdropFilter: 'blur(2px)' // subtle glass effect inside the ring
+                            zIndex: 9
                         }}>
-                            {/* Empty inside to look like a ring/sleeve, adding tiny grip indicators on the sides */}
-                            <div style={{ position: 'absolute', left: '-2px', width: '4px', height: '16px', background: isSwiping ? '#fff' : (active ? 'var(--color-accent)' : '#94a3b8'), borderRadius: '2px' }} />
-                            <div style={{ position: 'absolute', right: '-2px', width: '4px', height: '16px', background: isSwiping ? '#fff' : (active ? 'var(--color-accent)' : '#94a3b8'), borderRadius: '2px' }} />
+                            {/* Inner 25% Sleeve Ring (Centered) */}
+                            <div style={{
+                                width: '80px',
+                                height: '50%', // 50% of the 50% housing = 25% total height
+                                background: isSwiping ? 'rgba(255, 255, 255, 0.15)' : 'rgba(15, 23, 42, 0.2)',
+                                borderRadius: '10px',
+                                border: `3px solid ${isSwiping ? '#fff' : (active ? 'var(--color-accent)' : '#475569')}`,
+                                boxShadow: isSwiping
+                                    ? '0 0 25px rgba(255, 255, 255, 0.5), inset 0 0 10px rgba(255, 255, 255, 0.3)'
+                                    : (active ? '0 0 20px var(--color-accent-glow), inset 0 0 5px var(--color-accent-glow)' : 'none'),
+                                position: 'relative',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}>
+                                {/* Grip indicators */}
+                                <div style={{ position: 'absolute', left: '-2px', width: '4px', height: '16px', background: isSwiping ? '#fff' : (active ? 'var(--color-accent)' : '#475569'), borderRadius: '2px' }} />
+                                <div style={{ position: 'absolute', right: '-2px', width: '4px', height: '16px', background: isSwiping ? '#fff' : (active ? 'var(--color-accent)' : '#475569'), borderRadius: '2px' }} />
+                            </div>
                         </div>
                     </div>
                 </div>
