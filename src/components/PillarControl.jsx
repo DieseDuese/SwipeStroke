@@ -540,19 +540,41 @@ export default function PillarControl({ connectionKey, onDisconnect, onIntensity
                             cursor: 'ns-resize'
                         }}
                     >
-                        {/* Inner 75% Red Column */}
+                        {/* Inner 75% Red Column Container */}
                         <div style={{
                             position: 'absolute',
                             bottom: 0,
-                            left: 0,
-                            right: 0,
+                            left: '50%',
+                            transform: 'translateX(-50%)',
+                            width: '100%',
                             height: '75%',
-                            backgroundColor: 'rgba(239, 68, 68, 0.4)', // semi-transparent red
-                            borderBottomLeftRadius: '10px',
-                            borderBottomRightRadius: '10px',
                             pointerEvents: 'none',
                             zIndex: 1
-                        }} />
+                        }}>
+                            {/* Top part (26.66% dark red, wider, semicircle cap) */}
+                            <div style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: '-5px',
+                                right: '-5px',
+                                height: '26.66%',
+                                backgroundColor: 'rgba(153, 27, 27, 0.8)',
+                                borderTopLeftRadius: '35px',
+                                borderTopRightRadius: '35px',
+                            }} />
+
+                            {/* Bottom part (rest, base red, normal width) */}
+                            <div style={{
+                                position: 'absolute',
+                                bottom: 0,
+                                left: 0,
+                                right: 0,
+                                height: '73.34%',
+                                backgroundColor: 'rgba(239, 68, 68, 0.4)',
+                                borderBottomLeftRadius: '10px',
+                                borderBottomRightRadius: '10px',
+                            }} />
+                        </div>
 
                         {/* Active Area Indicator Background (Rail Energy) */}
                         {!isSwiping && (
